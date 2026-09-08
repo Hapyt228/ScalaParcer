@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Результат анализа</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f7f8fa; }
+        h2 { color: #2c3e50; }
+        table { border-collapse: collapse; width: 100%; background: #fff; margin-bottom: 25px; }
+        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: center; }
+        th { background: #2c3e50; color: #fff; }
+        tr:nth-child(even) { background: #f2f2f2; }
+        .summary, .extended { background: #fff; padding: 15px 20px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 25px; }
+        .summary p, .extended li { font-size: 16px; }
+        .back-link { display: inline-block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h2>Базовые метрики Холстеда</h2>
+
+<table>
+    <tr>
+        <th>j</th><th>Оператор</th><th>f1j</th>
+        <th>i</th><th>Операнд</th><th>f2i</th>
+    </tr>
+    <tr th:each="row : ${result.tableRows}">
+        <td th:text="${row.j != 0 ? row.j : ''}"></td>
+        <td th:text="${row.operator}"></td>
+        <td th:text="${row.f1j != 0 ? row.f1j : ''}"></td>
+        <td th:text="${row.i != 0 ? row.i : ''}"></td>
+        <td th:text="${row.operand}"></td>
+        <td th:text="${row.f2i != 0 ? row.f2i : ''}"></td>
+    </tr>
+</table>
+
+<div class="summary">
+    <p>η1 (словарь операторов) = <b th:text="${result.eta1}"></b></p>
+    <p>N1 (общее число операторов) = <b th:text="${result.n1}"></b></p>
+    <p>η2 (словарь операндов) = <b th:text="${result.eta2}"></b></p>
+    <p>N2 (общее число операндов) = <b th:text="${result.n2}"></b></p>
+</div>
+
+<h2>Расширенные метрики</h2>
+<div class="extended">
+    <ul>
+        <li>Словарь программы η = η1 + η2 = <b th:text="${result.vocabulary}"></b></li>
+        <li>Длина программы N = N1 + N2 = <b th:text="${result.length}"></b></li>
+        <li>Объём программы V = N × log2(η) = <b th:text="${#numbers.formatDecimal(result.volume, 1, 2)}"></b> бит</li>
+    </ul>
+</div>
+
+<a class="back-link" href="/">← Проверить другой код</a>
+
+</body>
+</html>

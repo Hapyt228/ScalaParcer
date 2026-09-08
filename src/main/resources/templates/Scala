@@ -1,0 +1,95 @@
+object Calc {
+
+  def sum(a: Int, b: Int): Int = {
+    var r = 0
+    var i = a
+    while (i <= b) {
+      r = r + i
+      i = i + 1
+    }
+    r
+  }
+
+  def fact(n: Int): Int = {
+    var r = 1
+    var i = 1
+    while (i <= n) {
+      r = r * i
+      i = i + 1
+    }
+    r
+  }
+
+  def power(a: Int, n: Int): Int = {
+    var r = 1
+    for (i <- 1 to n) {
+      r = r * a
+    }
+    r
+  }
+
+  def maxOf(a: Int, b: Int): Int = {
+    var r = 0
+    if (a > b) {
+      r = a
+    } else {
+      r = b
+    }
+    r
+  }
+
+  def minOf(a: Int, b: Int): Int = {
+    var r = 0
+    if (a < b) {
+      r = a
+    } else {
+      r = b
+    }
+    r
+  }
+
+  def check(n: Int): Int = {
+    var r = 0
+    n match {
+      case 0 => r = 0
+      case 1 => r = 1
+      case n => r = n
+    }
+    r
+  }
+
+  def series(a: Int, n: Int): Int = {
+    var r = 0
+    var i = 1
+    do {
+      r = r + a * i
+      i = i + 1
+    } while (i <= n)
+    r
+  }
+
+  def run(a: Int, b: Int, n: Int): Int = {
+    var r = 0
+    r = sum(a, b)
+    r = r + fact(n)
+    r = r + power(a, n)
+    r = r + maxOf(a, b)
+    r = r + minOf(a, b)
+    r = r + check(n)
+    r = r + series(a, n)
+    r
+  }
+
+  def main(args: Array[String]): Unit = {
+    var a = 2
+    var b = 2
+    var n = 2
+    var r = run(a, b, n)
+    println(r)
+    a = a + 1
+    b = b + 1
+    n = n + 1
+    r = run(a, b, n)
+    println(r)
+  }
+}
